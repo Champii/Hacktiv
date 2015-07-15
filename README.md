@@ -14,9 +14,9 @@ Tracker = require 'tracker'
 value = new Tracker.Value 'test'
 
 Tracker.Autorun ->
-  console.log value.Get()
+  console.log value()
 
-value.Set 'test2'
+value 'test2'
 ```
 
 Will successively print 'One Two' and 'One Three' :
@@ -29,9 +29,9 @@ value = new Tracker.Value 'One'
 value2 = new Tracker.Value 'Two'
 
 Tracker.Autorun ->
-  console.log value.Get() + ' ' + value2.Get()
+  console.log value() + ' ' + value2()
 
-value2.Set 'Three'
+value2 'Three'
 ```
 
 Will successively print 'test' and 'test2' :
@@ -42,12 +42,12 @@ Tracker = require 'tracker'
 value2 = new Tracker.Value 'test'
 
 value = new Tracker.Value ->
-  value2.Get()
+  value2()
 
 Tracker.Autorun ->
-  console.log value.Get()
+  console.log value()
 
-value2.Set 'test2'
+value2 'test2'
 ```
 
 ## Limits
@@ -58,4 +58,8 @@ correctly guessed cause of the global bus event 'depends', catched by every Comp
 ## TODO
 
  - Jail the Computation Record methods to avoir Dependencies collisions
- - Provide methods to stop watching 
+ - Provide methods to stop watching
+
+## Changelog
+
+ - Simplified syntax for Value. Now useable directly as function taking no parameter for Get and taking one for Set

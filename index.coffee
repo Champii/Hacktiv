@@ -47,20 +47,26 @@ class Dependency extends Bus
   Changed: ->
     @emit 'changed', @
 
-class Value
+Value = (value) ->
 
-  constructor: (@v) ->
-    @dep = new Dependency
+  do ->
+    dep = new Dependency
+    v = value
 
-  Get: ->
-    @dep.Depends()
-    if typeof(@v) is 'function'
-      @v()
-    else
-      @v
+    get = ->
+      if typeof(v) is 'function'
+        v()
+      else
+        v
 
-  Set: (@v) ->
-    @dep.Changed()
+    (newV) ->
+      if not newV?
+        dep.Depends()
+        get()
+      else
+        v = newV
+        dep.Changed()
+        v
 
 Tracker.Value = Value
 module.exports = Tracker
