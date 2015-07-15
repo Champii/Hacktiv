@@ -1,5 +1,8 @@
 # Tracker
-Naive implementation of (Meteor Tracker)[https://github.com/meteor/meteor/wiki/Tracker-Manual]
+
+Naive implementation of [Meteor Tracker](https://github.com/meteor/meteor/wiki/Tracker-Manual)
+
+Used to keep track of variables values, and automaticaly execute code when a value change.
 
 ## Quick Start
 
@@ -46,3 +49,13 @@ Tracker.Autorun ->
 
 value2.Set 'test2'
 ```
+
+## Limits
+
+When multiples Autorun functions run simultaneously, dependencies may not be
+correctly guessed cause of the global bus event 'depends', catched by every Computations
+
+## TODO
+
+ - Jail the Computation Record methods to avoir Dependencies collisions
+ - Provide methods to stop watching 
