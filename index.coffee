@@ -41,10 +41,10 @@ class Dependency extends Bus
   constructor: ->
     @id = Dependency.nextId++
 
-  Depends: ->
+  _Depends: ->
     bus.emit 'depends', @
 
-  Changed: ->
+  _Changed: ->
     @emit 'changed', @
 
 Value = (value) ->
@@ -61,12 +61,13 @@ Value = (value) ->
 
     (newV) ->
       if not newV?
-        dep.Depends()
+        dep._Depends()
         get()
       else
         v = newV
-        dep.Changed()
+        dep._Changed()
         v
 
 Tracker.Value = Value
+Tracker.Dependency = Dependency
 module.exports = Tracker
