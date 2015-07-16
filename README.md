@@ -7,6 +7,12 @@ Used to keep track of variable values, and automaticaly execute code when a valu
 It automaticaly guess data dependencies, and when one of them change, every Hacktiv
 functions that depends on this data are retriggered to take consideration of the new values.
 
+## Install
+
+```bash
+$> npm install hacktiv
+```
+
 ## Quick Start
 
 Will successively print 'test' and 'test2':
