@@ -1,10 +1,10 @@
-# Tracker
+# Hacktiv
 
 Implementation of the Functional reactive programming (FRP) paradigm, using reactive values. (Naive implementation of [Meteor Tracker](https://github.com/meteor/meteor/wiki/Tracker-Manual))
 
 Used to keep track of variable values, and automaticaly execute code when a value change.
 
-It automaticaly guess data dependencies, and when one of them change, every Autorun
+It automaticaly guess data dependencies, and when one of them change, every Hacktiv
 functions that depends on this data are retriggered to take consideration of the new values.
 
 ## Quick Start
@@ -12,15 +12,15 @@ functions that depends on this data are retriggered to take consideration of the
 Will successively print 'test' and 'test2':
 
 ```coffee-script
-Tracker = require 'tracker'
+Hacktiv = require 'hacktiv'
 
 # Get a new reactive value
-value = new Tracker.Value 'test'
+value = new Hacktiv.Value 'test'
 
-# The Autorun function will keep track of reactive values,
+# The Hacktiv function will keep track of reactive values,
 # re-executing the function if any of the values or any
 # of their dependencies called inside have changed
-Tracker.Autorun ->
+Hacktiv ->
 
   # Calling the value without parameter returns the actual value
   console.log value()
@@ -34,15 +34,15 @@ value 'test2'
 Will successively print 'One Two' and 'One Three' :
 
 ```coffee-script
-Tracker = require 'tracker'
+Hacktiv = require 'hacktiv'
 
-value = new Tracker.Value 'One'
+value = new Hacktiv.Value 'One'
 
-value2 = new Tracker.Value 'Two'
+value2 = new Hacktiv.Value 'Two'
 
 # Here if any of value or value2 change,
 # the console.log will reprint these two values
-Tracker.Autorun ->
+Hacktiv ->
   console.log value() + ' ' + value2()
 
 value2 'Three'
@@ -51,17 +51,17 @@ value2 'Three'
 Will successively print 'test' and 'test2' :
 
 ```coffee-script
-Tracker = require 'tracker'
+Hacktiv = require 'hacktiv'
 
-value2 = new Tracker.Value 'test'
+value2 = new Hacktiv.Value 'test'
 
 # You can set reactive values as Functions or Objects.
-# They can reference other values, that will cause the Autorun function
+# They can reference other values, that will cause the Hacktiv function
 # to rerun if any of them change
-value = new Tracker.Value ->
+value = new Hacktiv.Value ->
   value2()
 
-Tracker.Autorun ->
+Hacktiv ->
   console.log value()
 
 value2 'test2'
@@ -72,9 +72,9 @@ value2 'test2'
 Will successively print [], ['test1'] and ['test1', 'test2'] :
 
 ```coffee-script
-Tracker = require 'tracker'
+Hacktiv = require 'hacktiv'
 
-class List extends Tracker.Dependency
+class List extends Hacktiv.Dependency
 
   tasks: []
 
@@ -88,7 +88,7 @@ class List extends Tracker.Dependency
 
 list = new List
 
-Tracker.Autorun ->
+Hacktiv ->
 
   # Replace this with a websocket or a stream
   console.log list.Send()
@@ -100,16 +100,16 @@ list.AddTask 'test2'
 
 ## Limits
 
-When multiples Autorun functions run simultaneously, dependencies may not be
+When multiples Hacktiv functions run simultaneously, dependencies may not be
 correctly guessed cause of the global bus event 'depends', catched by every Computations
 
 ## API
 
-#### Tracker
+#### Hacktiv
 
-The Tracker is the main object, taking track of every computations.
+The Hacktiv is the main function, taking track of every computations.
 
-- Autorun(function)
+- Hacktiv(function)
   - Add a new Computation with the given function
 
 #### Computation

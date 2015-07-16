@@ -1,12 +1,10 @@
 Bus = require('events').EventEmitter
 bus = new Bus
 
-class Tracker
+computations = []
+Hacktiv = (f) ->
+  computations.push new Computation f
 
-  @computations: []
-
-  @Autorun: (f) ->
-    @computations.push new Computation f
 
 class Computation
 
@@ -68,6 +66,6 @@ Value = (value) ->
         dep._Changed()
         v
 
-Tracker.Value = Value
-Tracker.Dependency = Dependency
-module.exports = Tracker
+Hacktiv.Value = Value
+Hacktiv.Dependency = Dependency
+module.exports = Hacktiv
