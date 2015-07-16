@@ -1,0 +1,27 @@
+{
+  "name": "hacktiv",
+  "version": "0.0.1",
+  "description": "Auto re-execute functions when data change",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script/register test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Champii/Hacktiv.git"
+  },
+  "keywords": [
+    "FRP",
+    "Functional",
+    "Reactive",
+    "Programming"
+  ],
+  "author": "Champii",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/Champii/Hacktiv/issues"
+  },
+  "dependencies": {
+    "coffee-script": "^1.9.3"
+  }
+}
