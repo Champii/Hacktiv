@@ -1,3 +1,3 @@
 EventEmitter = require('events').EventEmitter
 
-module.exports = bus = new EventEmitter
+module.exports = new EventEmitter

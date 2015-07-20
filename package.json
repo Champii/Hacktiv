@@ -1,6 +1,6 @@
 {
   "name": "hacktiv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Auto re-execute functions when data change",
   "main": "index.js",
   "scripts": {
