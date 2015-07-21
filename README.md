@@ -40,8 +40,6 @@ value 'test2'
 Will successively print 'One Two' and 'One Three' :
 
 ```coffee-script
-Hacktiv = require 'hacktiv'
-
 value = new Hacktiv.Value 'One'
 
 value2 = new Hacktiv.Value 'Two'
@@ -57,8 +55,6 @@ value2 'Three'
 Will successively print 'test' and 'test2' :
 
 ```coffee-script
-Hacktiv = require 'hacktiv'
-
 value2 = new Hacktiv.Value 'test'
 
 # You can set reactive values as Functions or Objects.
@@ -71,6 +67,49 @@ Hacktiv ->
   console.log value()
 
 value2 'test2'
+```
+
+## Status
+
+You can check if you are in a watching context with `Hacktiv.active` booleen
+
+```coffee-script
+console.log Hacktiv.active    #false
+
+Hacktiv ->
+  console.log Hacktiv.active  #true
+
+console.log Hacktiv.active    #false
+```
+
+## Stop watching
+
+To stop watching, just get the handler back from your `Hacktiv` function
+and call its `Stop()` function
+
+```coffee-script
+value = new Hacktiv.Value 1
+
+handler = Hacktiv ->
+  console.log value()
+
+value2 'test2'
+
+handler.Stop()
+
+# This call will not refresh the function
+value2 'test3'
+```
+
+You can temporarily stop watching with Hacktiv.DontWatch() :
+
+```coffee-script
+Hacktiv ->
+
+  Hacktiv.DontWatch ->
+    # Here values are not monitored
+
+
 ```
 
 ## Playing with the Dependency object

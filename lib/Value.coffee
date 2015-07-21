@@ -12,13 +12,14 @@ Value = (value) ->
       else
         v
 
-    (newV) ->
+    (newV, hactive = true) ->
       if not newV?
-        dep._Depends()
+        dep._Depends() if hactive
         get()
       else
         v = newV
-        dep._Changed()
+        dep._Changed() if hactive
         v
+
 
 module.exports = Value
