@@ -4,7 +4,7 @@
   "description": "Auto re-execute functions when data change",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register test"
+    "test": "mocha --compilers ls:livescript test"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,10 @@
     "url": "https://github.com/Champii/Hacktiv/issues"
   },
   "dependencies": {
-    "coffee-script": "^1.9.3"
+    "coffee-script": "^1.9.3",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "livescript": "^1.4.0"
   }
 }

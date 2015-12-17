@@ -6,9 +6,20 @@ class _Hacktiv
   @current: null
 
   @Watch: (f) ->
+    @current?.Pause()
     comp = new Computation f
-    @computations.push comp
+    @current?.Resume()
     comp
+
+  @Pop: ->
+    comput = @computations.pop()
+    @SetCurrent comput
+    comput
+
+  @AddComput: (comput) ->
+    @computations.push @current if @current?
+    @SetCurrent comput
+    comput
 
   @DontWatch: (f) ->
     prev = @current
@@ -20,6 +31,7 @@ class _Hacktiv
     @current = comput
     @active = !!@current
     Hacktiv.active = @active
+    # console.log 'SetCurrent', @active
 
   @GetCurrent: -> @current
 
@@ -29,18 +41,20 @@ class _Hacktiv
 
 Hacktiv = (f) ->
   _Hacktiv.Watch f
+
+
 Hacktiv.DontWatch = (f) ->
   _Hacktiv.DontWatch f
 
 Hacktiv._ = _Hacktiv
 Hacktiv.active = false
 
-Dependency = require './Dependency'
-Value = require './Value'
+Dependency = require './Dependency.coffee'
+Value = require './Value.coffee'
 
 Hacktiv.Value = Value
 Hacktiv.Dependency = Dependency
 
 module.exports = Hacktiv
 Hacktiv.Computation = Computation
-Computation = require './Computation'
+Computation = require './Computation.coffee'

@@ -1,5 +1,7 @@
 # Hacktiv
 
+[![NPM](https://nodei.co/npm/hacktiv.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/hacktiv/)
+
 Implementation of the Functional reactive programming (FRP) paradigm, using reactive values. (Naive implementation of [Meteor Tracker](https://github.com/meteor/meteor/wiki/Tracker-Manual))
 
 Used to keep track of variable values, and automaticaly execute code when a value change.

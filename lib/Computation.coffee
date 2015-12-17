@@ -1,5 +1,5 @@
 _ = require 'underscore'
-bus = require './Bus'
+bus = require './Bus.coffee'
 
 nextId = 1
 
@@ -7,19 +7,22 @@ class Computation
 
   id: null
   deps: []
-  previous: null
 
   constructor: (@f) ->
     @id = nextId++
     @Record()
 
   Record: ->
-    @StartRecord()
+    if !Hacktiv._.replay
+      @StartRecord()
     @f()
-    @StopRecord()
+    if !Hacktiv._.replay
+      @StopRecord()
 
   StartRecord: ->
     return if @recorder?
+
+    Hacktiv._.AddComput @
 
     for dep in @deps
       dep.dep.removeListener 'changed', dep.handler
@@ -28,16 +31,24 @@ class Computation
     @recorder = (dep) =>
 
       handler = (dep) =>
-        @Record()
+        Hacktiv._.replay = true
+        @f()
+        Hacktiv._.replay = false
 
       dep.on 'changed', handler
       @deps.push {dep, handler} if dep not in @deps
 
     bus.on 'depends', @recorder
 
-    @previous = Hacktiv._.GetCurrent()
+  Pause: ->
+    return if not @recorder?
 
-    Hacktiv._.SetCurrent @
+    bus.removeListener 'depends', @recorder
+
+  Resume: ->
+    return if not @recorder?
+
+    bus.on 'depends', @recorder
 
   StopRecord: ->
     return if not @recorder?
@@ -45,13 +56,13 @@ class Computation
     bus.removeListener 'depends', @recorder
 
     @recorder = null
-    Hacktiv._.SetCurrent @previous
+    Hacktiv._.Pop()
 
   Stop: ->
     for dep in @deps
       dep.dep.removeListener 'changed', dep.handler
-      
+
     Hacktiv._.Remove @
 
 module.exports = Computation
-Hacktiv = require './Hacktiv'
+Hacktiv = require './Hacktiv.coffee'

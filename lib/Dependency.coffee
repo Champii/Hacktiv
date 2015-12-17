@@ -1,5 +1,5 @@
 EventEmitter = require('events').EventEmitter
-bus = require './Bus'
+bus = require './Bus.coffee'
 
 class Dependency extends EventEmitter
 
