@@ -1,5 +1,5 @@
 _ = require 'underscore'
-bus = require './Bus.coffee'
+bus = require './Bus'
 
 nextId = 1
 
@@ -8,7 +8,7 @@ class Computation
   id: null
   deps: []
 
-  constructor: (@f) ->
+  (@f) ->
     @id = nextId++
     @Record()
 
@@ -28,9 +28,9 @@ class Computation
       dep.dep.removeListener 'changed', dep.handler
 
     @deps = []
-    @recorder = (dep) =>
+    @recorder = (dep) ~>
 
-      handler = (dep) =>
+      handler = (dep) ~>
         Hacktiv._.replay = true
         @f()
         Hacktiv._.replay = false
@@ -65,4 +65,4 @@ class Computation
     Hacktiv._.Remove @
 
 module.exports = Computation
-Hacktiv = require './Hacktiv.coffee'
+Hacktiv = require './Hacktiv'

@@ -1,9 +1,9 @@
 EventEmitter = require('events').EventEmitter
-bus = require './Bus.coffee'
+bus = require './Bus'
 
 class Dependency extends EventEmitter
 
-  @nextId: 1
+  @nextId = 1
 
   constructor: ->
     @id = Dependency.nextId++

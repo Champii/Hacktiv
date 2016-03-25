@@ -1,4 +1,4 @@
-Dependency = require './Dependency.coffee'
+Dependency = require './Dependency'
 
 Value = (value) ->
 

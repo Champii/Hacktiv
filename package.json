@@ -22,7 +22,7 @@
     "url": "https://github.com/Champii/Hacktiv/issues"
   },
   "dependencies": {
-    "coffee-script": "^1.9.3",
+    "livescript": "^1.4.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

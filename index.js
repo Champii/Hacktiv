@@ -1,6 +1,5 @@
 // if require.resolve?
-if (require.resolve)
-  require('coffee-script').register()
-Hacktiv = require('./lib/Hacktiv.coffee')
+require('livescript');
+Hacktiv = require('./lib/Hacktiv.ls');
 
 module.exports = Hacktiv
