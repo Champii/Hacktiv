@@ -28,6 +28,9 @@ describe \Hacktiv ->
     times = 0
     v = new Hacktiv.Value 0
     handler = Hacktiv ->
+      console.log 'LOL' times, v!
+      if times isnt v!
+        throw new Error "Should have changed value : expected #{times} but was #{v!}"
       times++
       if times >= 2
         done!

@@ -1,7 +1,6 @@
 Dependency = require './Dependency'
 
 Value = (value) ->
-
   do ->
     dep = new Dependency
     v = value
@@ -17,7 +16,7 @@ Value = (value) ->
         dep._Depends() if hactive
         get()
       else
-        v = newV
+        v := newV
         dep._Changed() if hactive
         v
 
